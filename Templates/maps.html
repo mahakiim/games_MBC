@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+
+        .search-container {
+            margin-bottom: 0px;
+            padding: 5px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            }
+
+        #suggestions {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #suggestions li {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        #suggestions li:hover {
+            background-color: #e0e0e0;
+        }
+
+        .museum-photo {
+            display: block;
+            margin: 0 auto;
+            width: 100px;
+            height: auto;
+        }
+
+        h1 {
+            background-image: url('../static/bgmaps.png');
+            background-size: cover;
+            color:hwb(30 0% 26%);
+            text-align: center;
+            padding: 40px 0;
+            font-size: 70px;
+            font-style: italic;
+            margin: 0 0 0px 0;
+        }
+
+        nav {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 15px 25px;
+            font-size: 20px;
+            color: rgb(255, 255, 255);
+            background-color: #bb6305;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Peta Persebaran Museum Di Kabupaten Kota Bandung </h1>
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search for museums..." />
+        <ul id="suggestions"></ul>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var map = L.map('map').setView([-6.920000, 107.6000], 13.5);
+
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 19,
+                attribution: '© Esri, Maxar, Earthstar Geographics, and the GIS user community'
+            }).addTo(map);
+
+            var museums = [
+                { name: "Museum Barli", coords: [-6.878006331628735, 107.58751555995298], address: "Jl. Prof. Dr. Sutami No. 91", photo: "../static/barli.jpg" },
+                { name: "Museum Kebudayaan Tionghoa", coords: [-6.921508710665503, 107.57737571762448], address: "Jl. Nana Rohana No. 37", photo: "../static/tionghoa.jpg" },
+                { name: "Museum 3D", coords: [-6.851344353299782, 107.59614722844145], address: "Jl. Dr. Setiabudi", photo: "../static/preager.jpg" },
+                { name: "Museum Preanger", coords: [-6.920265478700762, 107.61183338639137], address: "Jl. Asia Afrika No. 81", photo: "../static/preager.jpg" },
+                { name: "Museum Kota Bandung", coords: [-6.909695471226114, 107.60948860934798], address: "Jl. Aceh No. 47", photo: "../static/download.jpg" },
+                { name: "Museum Mandala Wangsit Siliwangi", coords: [-6.917080525954087, 107.61115542653945], address: "Jl. Lembong No. 39", photo: "../static/mandala.jpg" },
+                { name: "Museum Sri Baduga", coords: [-6.93732398447358, 107.60344538051278], address: "Jl. BKR No. 185", photo: "../static/sribaduga.jpeg" },
+                { name: "Museum Geologi Bandung", coords: [-6.900535124081027, 107.62153039770357], address: "Jl. Diponegoro No. 57", photo: "../static/Geologi.jpg" },
+                { name: "Museum Gedung Sate", coords: [-6.902372466815933, 107.61913113236142], address: "Jl. Diponegoro No. 22", photo: "../static/sate.jpg" },
+                { name: "Museum Konferensi Asia Afrika", coords: [-6.9211198358536885, 107.60962821119725], address: "Jl. Asia Afrika No. 65", photo: "../static/asia.jpg" },
+                { name: "Museum Pos Indonesia", coords: [-6.901837820239344, 107.61964733633437], address: "Jl. Cilaki No. 73", photo: "../static/pos.jpg" },
+                { name: "Museum Lapas Banceuy", coords: [-6.919421703235185, 107.60712164830913], address: "Jl. Banceuy", photo: "../static/lapas.jpg" },
+                { name: "Museum Mainan", coords: [-6.919864408880328, 107.61773667714465], address: "X", photo: "../static/mainan.jpg" },
+                { name: "Museum Virajati Seskoad", coords: [-6.926871860487284, 107.62827421577546], address: "Jl. Gatot Subroto No. 96", photo: "../static/virajati.jpg" },
+                { name: "Museum Nike Ardilla", coords: [-6.940340264022904, 107.67245224461121], address: "Kompleks Arya Graha, Jl. Aria Utama No. 5", photo: "../static/nike.jpg" },
+                { name: "Hall of Fame Jawa Barat - Panggung Inohong", coords: [-6.935498513632048, 107.66234543296689], address: "Bapusipda", photo: "../static/hall.jpg" },
+                { name: "Museum Pendidikan Nasional", coords: [-6.859711198823873, 107.59408308693924], address: "Jl. Dr. Setiabudi No. 225", photo: "../static/pendidikan.jpg" },
+                { name: "Gedung Indonesia Menggugat", coords: [-6.913361754428878, 107.60806054646004], address: "Bukan ini bre, coba lagi", photo: "../static/menggugat.JPG" },
+                { name: "Museum Perjuangan Rakyat Jawa Barat", coords: [-6.893171736717222, 107.61853520228203], address: "Nyariin apa mas???", photo: "../static/perjuangan.jpg" },
+                { name: "Museum Bumi Pakarang Sasuhunan", coords: [-6.9076012656974015, 107.67903222422584], address: "Jl. Pinus Galuh I No. 5", photo: "../static/pakarangan.jpg" },
+                { name: "Museum Bio Farma", coords: [-6.899240196909223, 107.59985559488574], address: "Jl. Pasteur No. 28", photo: "../static/biofarma.jpg" }
+            ];
+
+            var markersLayer = new L.LayerGroup();
+            map.addLayer(markersLayer);
+
+            function addMarkers(filteredMuseums) {
+                markersLayer.clearLayers();
+                filteredMuseums.forEach(function (museum) {
+                    var popupContent = "<b>" + museum.name + "</b><br>" + museum.address + "<br><img src='" + museum.photo + "' class='museum-photo' />";
+                    var marker = L.marker(museum.coords)
+                        .bindPopup(popupContent)
+                        .addTo(markersLayer);
+                });
+            }
+
+            addMarkers(museums);
+
+            var searchInput = document.getElementById('search');
+            var suggestionsList = document.getElementById('suggestions');
+
+            searchInput.addEventListener('input', function () {
+                var searchTerm = searchInput.value.toLowerCase();
+                suggestionsList.innerHTML = '';
+                if (searchTerm) {
+                    var filteredMuseums = museums.filter(function (museum) {
+                        return museum.name.toLowerCase().includes(searchTerm);
+                    });
+                    filteredMuseums.forEach(function (museum) {
+                        var listItem = document.createElement('li');
+                        listItem.textContent = museum.name;
+                        listItem.addEventListener('click', function () {
+                            map.setView(museum.coords, 20);
+                            searchInput.value = museum.name;
+                            suggestionsList.innerHTML = '';
+                        });
+                        suggestionsList.appendChild(listItem);
+                    });
+                }
+                addMarkers(filteredMuseums);
+            });
+        });
+    </script>
+    <nav>
+        <a href="/">Home</a> | 
+        <a href="/about">About</a> | 
+        <a href="/maps">Maps</a>
+    </nav>
+</body>
+
+</html>

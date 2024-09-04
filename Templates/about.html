@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('../static/bgab.png'); 
+            background-size: cover;
+        }
+
+        h1 {
+            text-align: center;
+            color: hwb(30 0% 26%);
+            margin-top: 50px;
+            font-size: 80px;
+        }
+
+        p {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 15px 25px;
+            margin: 0 10px;
+            font-size: 18px;
+            color: white;
+            background-color: #bb6305;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #0056b3;
+        }
+
+        #chartContainer {
+            width: 60%;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        #description {
+            width: 60%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Data Statistik Museum</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/maps">Maps</a>
+    </nav>
+
+   
+    <div id="chartContainer">
+        <canvas id="museumChart"></canvas>
+    </div>
+
+    
+    <div id="description">
+        <h2>Keterangan</h2>
+            Untuk membagi daftar museum di Kota Bandung berdasarkan wilayah Barat, Utara, Timur, dan Selatan, kita bisa menggunakan titik referensi umum untuk membagi wilayah tersebut. Mari kita kategorikan museum-museum ini:
+        </p>
+        <h3>Wilayah Utara</h3>
+        <ul>
+            <li><strong>Museum Geologi Bandung</strong> - Jl. Diponegoro No. 57</li>
+            <li><strong>Museum Gedung Sate</strong> - Jl. Diponegoro No. 22</li>
+            <li><strong>Museum Pendidikan Nasional</strong> - Jl. Dr. Setiabudi No. 225</li>
+            <li><strong>Museum 3D</strong> - Jl. Dr. Setiabudi</li>
+        </ul>
+
+        <h3>Wilayah Barat</h3>
+        <ul>
+            <li><strong>Museum Barli</strong> - Jl. Prof. Dr. Sutami No. 91</li>
+            <li><strong>Museum Kebudayaan Tionghoa</strong> - Jl. Nana Rohana No. 37</li>
+            <li><strong>Museum Nike Ardilla</strong> - Komp. Arya Graha, Jl. Aria Utama No. 5</li>
+            <li><strong>Museum Bio Farma</strong> - Jl. Pasteur No. 28</li>
+            <li><strong>Museum Virajati Seskoad</strong> - Jl. Gatot Subroto No. 96</li>
+        </ul>
+
+        <h3>Wilayah Timur</h3>
+        <ul>
+            <li><strong>Museum Kota Bandung</strong> - Jl. Aceh No. 47</li>
+            <li><strong>Museum Mainan</strong> - Jl. Sunda No. 39</li>
+            <li><strong>Gedung Indonesia Menggugat</strong> - Jl. Perintis Kemerdekaan No. 5</li>
+        </ul>
+
+        <h3>Wilayah Selatan</h3>
+        <ul>
+            <li><strong>Museum Sri Baduga</strong> - Jl. BKR No. 185</li>
+            <li><strong>Museum Perjuangan Rakyat Jawa Barat</strong> - Jl. Dipatiukur No. 48</li>
+            <li><strong>Museum Mandala Wangsit Siliwangi</strong> - Jl. Lembong No. 39</li>
+            <li><strong>Museum Preanger</strong> - Jl. Asia Afrika No. 81</li>
+            <li><strong>Museum Konferensi Asia Afrika</strong> - Jl. Asia Afrika No. 65</li>
+            <li><strong>Museum Pos Indonesia</strong> - Jl. Cilaki No. 73</li>
+            <li><strong>Museum Lapas Banceuy</strong> - Jl. Banceuy</li>
+            <li><strong>Museum Bumi Pakarang Sasuhunan</strong> - Jl. Pinus Galuh I No. 5</li>
+            <li><strong>Hall of Fame Jawa Barat - Panggung Inohong</strong> - Bapusipda</li>
+        </ul>
+          Dataset ini berisi data daftar museum di Kota Bandung tahun 2021. Dataset terkait topik Infrastruktur ini dihasilkan oleh Dinas Kebudayaan dan Pariwisata yang dikeluarkan dalam periode 1 tahun sekali. Data ini diambil dari Dinas Kebudayaan dan Pariwisata Kota Bandung.
+    </div>
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  
+    <script>
+        var ctx = document.getElementById('museumChart').getContext('2d');
+        var museumChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['West', 'North', 'East', 'South'],
+                datasets: [{
+                    label: 'Number of Museums',
+                    data: [5, 4, 3, 9],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0'
+                    ],
+                    borderColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
