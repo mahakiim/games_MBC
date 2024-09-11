@@ -9,14 +9,13 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('../static/bgmaps.png'); 
+            background-image: url('../static/ulartangga2.jpeg'); 
             background-size: cover;
-            
         }
 
         h1 {
             text-align: center;
-            color: hwb(30 0% 26%);
+            color: #ff0000;
             margin-top: 80px;
             font-size: 90px;
             font-weight: bolder;
@@ -30,20 +29,27 @@
 
         nav {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             margin-top: 30px;
+            max-width: 1200px; /* Batasi lebar maksimal untuk 6 box */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         nav a {
             display: inline-block;
-            padding: 15px 25px;
-            margin: 0 10px;
+            width: 150px; /* Lebar kotak persegi */
+            height: 150px; /* Tinggi kotak persegi */
+            margin: 10px;
             font-size: 18px;
             color: white;
-            background-color: #bb6305;
+            background-color: #007bff;
             border-radius: 5px;
             text-decoration: none;
             transition: background-color 0.3s ease;
+            text-align: center;
+            line-height: 150px; /* Agar teks berada di tengah secara vertikal */
         }
 
         nav a:hover {
@@ -52,15 +58,39 @@
     </style>
 </head>
 <body>
-    <h1>    Nyari Apa mas??     </h1>
-    <p>Edo minjem yak</p>
+    <h1>SILAHKAN PILIH DIBAWAH INI</h1>
+    <p></p>
     <nav>
+        <!-- Membuat 30 box nav -->
         <a href="/">Home</a>
         <a href="/about">About</a>
         <a href="/maps">Maps</a>
         <a href="/gaada">gaada</a>
+        <a href="/abc">hehe</a>
+        <a href="/hehe">apalu</a>
         <a href="/hehe">hehe</a>
         <a href="/hehe">apalu</a>
+        <a href="/hehe">hehe</a>
+        <a href="/hehe">apalu</a>
+        <a href="/hehe">hehe</a>
+        <a href="/hehe">apalu</a>
+        <a href="/hehe">apalu</a>
+        <a href="/hehe">hehe</a>
+        <a href="/hehe">apalu</a>
+        <a href="/home">Home 2</a>
+        <a href="/about2">About 2</a>
+        <a href="/maps2">Maps 2</a>
+        <a href="/gaada2">gaada 2</a>
+        <a href="/abc2">hehe 2</a>
+        <a href="/hehe2">apalu 2</a>
+        <a href="/hehe2">hehe 2</a>
+        <a href="/hehe3">apalu 3</a>
+        <a href="/hehe3">hehe 3</a>
+        <a href="/hehe3">apalu 3</a>
+        <a href="/hehe4">hehe 4</a>
+        <a href="/hehe4">apalu 4</a>
+        <a href="/hehe4">hehe 4</a>
+        <a href="/hehe4">apalu 4</a>
     </nav>
 </body>
 </html>
