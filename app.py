@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import os
 
 app = Flask(__name__)
-from Controller import about, home, maps, gaada
+from controller import about, home, maps, gaada
 
 #testing mas
 
