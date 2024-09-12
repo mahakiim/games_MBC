@@ -11,5 +11,9 @@ app.register_blueprint(about.about_bp)
 app.register_blueprint(maps.maps_bp)
 app.register_blueprint(gaada.gaada_bp)
 
+@app.route('/')
+def index():
+    return render_template('home.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
